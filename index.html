@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AA4 · Estrategia final de evaluación auténtica | SISE</title>
+
+<style>
+:root{
+  --red:#FF0E49;
+  --red-dark:#D9003E;
+  --dark:#241F21;
+  --dark2:#30282B;
+  --wine:#6B1E36;
+  --soft:#FFF1F5;
+  --paper:#F8F6F7;
+  --border:#E7E1E3;
+  --text:#241F21;
+  --muted:#625A5D;
+  --green:#187451;
+  --green-soft:#EDF8F3;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  background:#FFFFFF;
+}
+
+body{
+  padding:20px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+#aa4-app{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:32px;
+  border-radius:14px;
+  color:#FFFFFF;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--dark) 0%,
+      var(--dark2) 58%,
+      var(--wine) 140%
+    );
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  right:-105px;
+  top:-145px;
+  border:2px solid rgba(255,255,255,.11);
+  border-radius:50%;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:860px;
+}
+
+.badge{
+  display:inline-block;
+  margin-bottom:11px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:var(--red);
+  color:#FFFFFF;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  margin:0;
+  color:#FFFFFF;
+  font-size:clamp(33px,5vw,48px);
+  line-height:1.04;
+  font-weight:900;
+}
+
+.hero h1 span{
+  color:var(--red);
+}
+
+.hero p{
+  max-width:820px;
+  margin:14px 0 0;
+  color:#F4ECEF;
+  font-size:16px;
+  line-height:1.65;
+}
+
+
+/* =========================
+   AVISO
+========================= */
+
+.notice{
+  margin-top:16px;
+  padding:18px 20px;
+  border:1px solid #F7D4E0;
+  border-left:6px solid var(--red);
+  border-radius:10px;
+  background:var(--soft);
+}
+
+.notice strong{
+  display:block;
+  margin-bottom:5px;
+  color:var(--red);
+  font-size:16px;
+}
+
+.notice p{
+  margin:0;
+  color:#403A3C;
+  font-size:14.5px;
+  line-height:1.6;
+}
+
+
+/* =========================
+   PROGRESO
+========================= */
+
+.progress-box{
+  margin-top:24px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.progress-track{
+  width:100%;
+  height:8px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#EFEAEC;
+}
+
+.progress-fill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  background:var(--red);
+  transition:.25s ease;
+}
+
+
+/* =========================
+   RUTA 9 SECCIONES
+========================= */
+
+.section{
+  margin-top:26px;
+}
+
+.section-label{
+  display:block;
+  margin-bottom:4px;
+  color:var(--red);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.section h2{
+  margin:0 0 7px;
+  color:var(--dark);
+  font-size:28px;
+  line-height:1.12;
+}
+
+.section-intro{
+  margin:0 0 15px;
+  color:var(--muted);
+  font-size:14.5px;
+  line-height:1.6;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.step-btn{
+  min-height:66px;
+  padding:11px 12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#FFFFFF;
+  color:var(--dark);
+  text-align:left;
+  cursor:pointer;
+  font-weight:800;
+}
+
+.step-btn span{
+  display:block;
+  margin-bottom:3px;
+  color:var(--red);
+  font-size:11px;
+  font-weight:900;
+}
+
+.step-btn:hover{
+  border-color:var(--red);
+}
+
+.step-btn.active{
+  border-color:var(--red);
+  background:var(--soft);
+  box-shadow:inset 0 -4px 0 var(--red);
+}
+
+.step-btn.completed:after{
+  content:" ✓";
+  color:var(--green);
+}
+
+
+/* =========================
+   EDITOR
+========================= */
+
+.editor{
+  margin-top:12px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#FFFFFF;
+}
+
+.editor-head{
+  padding:18px 20px;
+  background:var(--dark);
+  color:#FFFFFF;
+}
+
+.editor-head small{
+  display:block;
+  margin-bottom:4px;
+  color:#FFB6CA;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.editor-head h3{
+  margin:0;
+  color:#FFFFFF;
+  font-size:23px;
+}
+
+.editor-body{
+  padding:20px;
+}
+
+.help{
+  margin:0 0 16px;
+  padding:13px 15px;
+  border-left:5px solid var(--red);
+  border-radius:8px;
+  background:var(--paper);
+  color:#514A4D;
+  font-size:14px;
+  line-height:1.55;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.fields{
+  display:grid;
+  gap:15px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--dark);
+  font-size:14px;
+  font-weight:900;
+}
+
+.field small{
+  display:block;
+  margin:-2px 0 7px;
+  color:var(--muted);
+  font-size:12.5px;
+  line-height:1.4;
+}
+
+.field input,
+.field textarea{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid #D2CBCD;
+  border-radius:8px;
+  background:#FFFFFF;
+  color:var(--text);
+  line-height:1.5;
+}
+
+.field textarea{
+  min-height:115px;
+  resize:vertical;
+}
+
+.field textarea.large{
+  min-height:180px;
+}
+
+.field input:focus,
+.field textarea:focus{
+  outline:3px solid rgba(255,14,73,.12);
+  border-color:var(--red);
+}
+
+.two-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+.editor-nav{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:18px;
+  padding-top:15px;
+  border-top:1px solid var(--border);
+}
+
+.nav-btn{
+  min-height:43px;
+  padding:10px 15px;
+  border:1px solid var(--dark);
+  border-radius:7px;
+  background:#FFFFFF;
+  color:var(--dark);
+  font-weight:800;
+  cursor:pointer;
+}
+
+.nav-btn.primary{
+  border-color:var(--red);
+  background:var(--red);
+  color:#FFFFFF;
+}
+
+.nav-btn:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+
+/* =========================
+   CHECKLIST
+========================= */
+
+.checklist{
+  margin-top:26px;
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:var(--paper);
+}
+
+.checklist h2{
+  margin:0 0 6px;
+  font-size:25px;
+}
+
+.checklist > p{
+  margin:0 0 15px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+}
+
+.check-item{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-bottom:8px;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#FFFFFF;
+}
+
+.check-item:last-child{
+  margin-bottom:0;
+}
+
+.check-item input{
+  width:19px;
+  height:19px;
+  min-width:19px;
+  accent-color:var(--red);
+}
+
+.check-item label{
+  color:#403A3C;
+  font-size:14px;
+  line-height:1.45;
+}
+
+
+/* =========================
+   DESCARGA
+========================= */
+
+.download-panel{
+  margin-top:20px;
+  padding:20px;
+  border-radius:11px;
+  background:var(--dark);
+  color:#FFFFFF;
+}
+
+.download-panel small{
+  display:block;
+  margin-bottom:4px;
+  color:#FFB6CA;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.download-panel h2{
+  margin:0 0 6px;
+  color:#FFFFFF;
+  font-size:24px;
+}
+
+.download-panel p{
+  margin:0;
+  color:#F3EBEE;
+  font-size:14px;
+  line-height:1.55;
+}
+
+.download-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
+}
+
+.download-btn{
+  min-height:46px;
+  padding:12px 18px;
+  border:0;
+  border-radius:8px;
+  background:var(--red);
+  color:#FFFFFF;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.download-btn:hover{
+  background:var(--red-dark);
+}
+
+.download-btn.secondary{
+  border:1px solid rgba(255,255,255,.35);
+  background:transparent;
+}
+
+.download-btn.secondary:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.download-status{
+  display:none;
+  margin-top:12px;
+  padding:11px 13px;
+  border-radius:8px;
+  background:var(--green-soft);
+  color:#18543F;
+  font-size:13.5px;
+}
+
+.download-status.show{
+  display:block;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+  body{
+    padding:12px;
+  }
+
+  .hero{
+    padding:24px 20px;
+  }
+
+  .steps{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .two-cols{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:520px){
+
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .editor-nav{
+    flex-direction:column;
+  }
+
+  .nav-btn,
+  .download-btn{
+    width:100%;
+  }
+
+  .download-actions{
+    flex-direction:column;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<main id="aa4-app">
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      AA4 · PRODUCTO FINAL DEL MÓDULO 4
+    </div>
+
+    <h1>
+      Construye tu
+      <span>estrategia final de evaluación auténtica</span>
+    </h1>
+
+    <p>
+      Recupera lo desarrollado en AA1, AA2 y AA3,
+      integra las decisiones de los Temas 07 y 08
+      y deja lista tu estrategia para aplicarla posteriormente
+      en el Caso Integrador.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- AVISO -->
+
+<section class="notice">
+
+  <strong>
+    Aquí elaborarás tu AA4 completa
+  </strong>
+
+  <p>
+    No necesitas comenzar de cero. Recupera y pega las versiones finales
+    de tus trabajos anteriores, completa las decisiones de implementación
+    y descarga al final tu documento
+    <strong>“Estrategia final de evaluación auténtica y plan de implementación”.</strong>
+    En esta etapa todavía no se solicita evidencia de aplicación en aula.
+  </p>
+
+</section>
+
+
+<!-- PROGRESO -->
+
+<div class="progress-box">
+
+  <div class="progress-top">
+
+    <span>
+      Avance de la estrategia
+    </span>
+
+    <strong id="progressText">
+      0 de 9 secciones completas
+    </strong>
+
+  </div>
+
+  <div class="progress-track">
+
+    <div
+      class="progress-fill"
+      id="progressFill">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     SECCIONES
+========================= -->
+
+<section class="section">
+
+  <span class="section-label">
+    Plantilla editable
+  </span>
+
+  <h2>
+    Completa las 9 secciones de tu AA4
+  </h2>
+
+  <p class="section-intro">
+    Puedes avanzar en orden o seleccionar directamente
+    la sección que deseas completar.
+  </p>
+
+
+  <div class="steps" id="steps">
+
+    <button class="step-btn active" type="button" data-step="0">
+      <span>01</span>
+      Contexto
+    </button>
+
+    <button class="step-btn" type="button" data-step="1">
+      <span>02</span>
+      Brecha inicial
+    </button>
+
+    <button class="step-btn" type="button" data-step="2">
+      <span>03</span>
+      Evidencia auténtica
+    </button>
+
+    <button class="step-btn" type="button" data-step="3">
+      <span>04</span>
+      Instrumento
+    </button>
+
+    <button class="step-btn" type="button" data-step="4">
+      <span>05</span>
+      Retroalimentación
+    </button>
+
+    <button class="step-btn" type="button" data-step="5">
+      <span>06</span>
+      Uso responsable de IA
+    </button>
+
+    <button class="step-btn" type="button" data-step="6">
+      <span>07</span>
+      Plan de implementación
+    </button>
+
+    <button class="step-btn" type="button" data-step="7">
+      <span>08</span>
+      Riesgos y ajustes
+    </button>
+
+    <button class="step-btn" type="button" data-step="8">
+      <span>09</span>
+      Compromiso de aplicación
+    </button>
+
+  </div>
+
+
+  <!-- EDITOR -->
+
+  <div class="editor">
+
+    <div class="editor-head">
+
+      <small id="editorLabel">
+        SECCIÓN 01
+      </small>
+
+      <h3 id="editorTitle">
+        Contexto
+      </h3>
+
+    </div>
+
+
+    <div class="editor-body">
+
+      <div
+        class="help"
+        id="editorHelp">
+      </div>
+
+      <div
+        class="fields"
+        id="fields">
+      </div>
+
+
+      <div class="editor-nav">
+
+        <button
+          type="button"
+          class="nav-btn"
+          id="prevBtn"
+          disabled>
+
+          ← Sección anterior
+
+        </button>
+
+
+        <button
+          type="button"
+          class="nav-btn primary"
+          id="nextBtn">
+
+          Siguiente sección →
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CHECKLIST
+========================= -->
+
+<section class="checklist">
+
+  <span class="section-label">
+    Antes de descargar
+  </span>
+
+  <h2>
+    Checklist final de coherencia
+  </h2>
+
+  <p>
+    Revisa tu estrategia completa antes de generar el archivo final.
+  </p>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check1">
+
+    <label for="check1">
+      La estrategia integra AA1, AA2 y AA3 sin contradicciones.
+    </label>
+
+  </div>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check2">
+
+    <label for="check2">
+      La evidencia auténtica permite demostrar el resultado de aprendizaje.
+    </label>
+
+  </div>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check3">
+
+    <label for="check3">
+      El instrumento valora exactamente la evidencia que será producida o demostrada.
+    </label>
+
+  </div>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check4">
+
+    <label for="check4">
+      Los criterios son observables y comprensibles.
+    </label>
+
+  </div>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check5">
+
+    <label for="check5">
+      La retroalimentación orienta acciones concretas de mejora.
+    </label>
+
+  </div>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check6">
+
+    <label for="check6">
+      El uso de IA está definido y se comunica de manera transparente.
+    </label>
+
+  </div>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check7">
+
+    <label for="check7">
+      El plan de implementación es realizable con el tiempo, recursos y modalidad disponibles.
+    </label>
+
+  </div>
+
+
+  <div class="check-item">
+
+    <input type="checkbox" id="check8">
+
+    <label for="check8">
+      Está claro qué parte de la estrategia se aplicará posteriormente en el Caso Integrador.
+    </label>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     DESCARGA
+========================= -->
+
+<section class="download-panel">
+
+  <small>
+    Producto AA4
+  </small>
+
+  <h2>
+    Genera tu estrategia final
+  </h2>
+
+  <p>
+    La descarga genera un archivo HTML limpio con las nueve secciones
+    que completaste y tu checklist de coherencia.
+    Puedes abrirlo en cualquier navegador y utilizar
+    <strong>Imprimir → Guardar como PDF</strong>
+    si necesitas presentar el producto en PDF.
+  </p>
+
+
+  <div class="download-actions">
+
+    <button
+      type="button"
+      class="download-btn"
+      id="downloadBtn">
+
+      Descargar mi estrategia final
+
+    </button>
+
+
+    <button
+      type="button"
+      class="download-btn secondary"
+      id="previewBtn">
+
+      Ver versión final
+
+    </button>
+
+  </div>
+
+
+  <div
+    class="download-status"
+    id="downloadStatus"
+    aria-live="polite">
+  </div>
+
+</section>
+
+
+</main>
+
+
+<script>
+(function(){
+
+  const root =
+    document.getElementById("aa4-app");
+
+
+  /* =========================================
+     ESTRUCTURA AA4
+  ========================================= */
+
+  const SECTIONS = [
+
+    {
+      label:"SECCIÓN 01",
+      title:"Contexto",
+
+      help:
+        "Recupera los datos del curso en el que se aplicará posteriormente la estrategia. Esta sección permite ubicar claramente el contexto de la propuesta.",
+
+      fields:[
+
+        {
+          id:"curso",
+          label:"Curso",
+          type:"input",
+          placeholder:"Nombre del curso"
+        },
+
+        {
+          id:"resultado",
+          label:"Resultado de aprendizaje",
+          type:"textarea",
+          placeholder:"Pega o escribe el resultado de aprendizaje seleccionado."
+        },
+
+        {
+          id:"competencia",
+          label:"Competencia asociada",
+          type:"textarea",
+          placeholder:"Escribe la competencia vinculada con el resultado."
+        },
+
+        {
+          id:"grupo",
+          label:"Grupo, sección o modalidad",
+          type:"textarea",
+          placeholder:"Describe brevemente el grupo, sección y/o modalidad."
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 02",
+      title:"Brecha inicial",
+
+      help:
+        "Recupera de AA1 únicamente la síntesis del problema que motivó el rediseño de tu evaluación.",
+
+      fields:[
+
+        {
+          id:"brecha",
+          label:"Síntesis de la brecha diagnosticada en AA1",
+          type:"textarea-large",
+          placeholder:
+            "¿Qué limitación presentaba originalmente la evidencia o evaluación de tu curso?"
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 03",
+      title:"Evidencia auténtica",
+
+      help:
+        "Recupera la versión final trabajada en AA2. No diseñes una nueva evidencia.",
+
+      fields:[
+
+        {
+          id:"evidencia",
+          label:"Versión final de la evidencia auténtica",
+          type:"textarea-large",
+          placeholder:
+            "Pega aquí la descripción final de la evidencia auténtica desarrollada en AA2."
+        },
+
+        {
+          id:"autenticidad",
+          label:"¿Por qué esta evidencia es auténtica?",
+          type:"textarea",
+          placeholder:
+            "Explica brevemente cómo conecta con una situación significativa, real, simulada o profesional."
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 04",
+      title:"Instrumento",
+
+      help:
+        "Integra el instrumento final proveniente de AA3. Debe corresponder exactamente a la evidencia auténtica que acabas de registrar.",
+
+      fields:[
+
+        {
+          id:"tipoInstrumento",
+          label:"Tipo de instrumento",
+          type:"input",
+          placeholder:
+            "Ejemplo: rúbrica analítica, lista de cotejo, guía de observación..."
+        },
+
+        {
+          id:"instrumento",
+          label:"Instrumento final",
+          type:"textarea-large",
+          placeholder:
+            "Pega aquí los criterios, niveles de desempeño o condiciones de cumplimiento de tu instrumento final."
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 05",
+      title:"Retroalimentación",
+
+      help:
+        "Define cómo utilizarás la información del instrumento para orientar la mejora del estudiante.",
+
+      fields:[
+
+        {
+          id:"feedbackAntes",
+          label:"Antes",
+          type:"textarea",
+          placeholder:
+            "¿Qué información o criterios comunicarás antes de la actividad?"
+        },
+
+        {
+          id:"feedbackDurante",
+          label:"Durante",
+          type:"textarea",
+          placeholder:
+            "¿Cómo acompañarás o brindarás retroalimentación durante el proceso?"
+        },
+
+        {
+          id:"feedbackDespues",
+          label:"Después",
+          type:"textarea",
+          placeholder:
+            "¿Cómo comunicarás logros, brechas y acciones concretas de mejora?"
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 06",
+      title:"Uso responsable de IA",
+
+      help:
+        "Define con claridad las condiciones de uso de IA en esta evaluación. La IA puede apoyar el proceso, pero no reemplaza la autoría ni el juicio humano.",
+
+      fields:[
+
+        {
+          id:"iaPermitido",
+          label:"Uso permitido de IA",
+          type:"textarea",
+          placeholder:
+            "¿Para qué puede utilizarse IA durante la actividad?"
+        },
+
+        {
+          id:"iaDeclaracion",
+          label:"Declaración y transparencia",
+          type:"textarea",
+          placeholder:
+            "¿Cómo deberá declarar el estudiante si utilizó IA?"
+        },
+
+        {
+          id:"iaVerificacion",
+          label:"Verificación y autoría",
+          type:"textarea",
+          placeholder:
+            "¿Qué deberá verificar, modificar, sustentar o asumir personalmente?"
+        },
+
+        {
+          id:"iaJuicio",
+          label:"Juicio humano que se mantendrá",
+          type:"textarea",
+          placeholder:
+            "¿Qué decisiones evaluativas permanecerán bajo responsabilidad del docente y/o estudiante?"
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 07",
+      title:"Plan de implementación",
+
+      help:
+        "Convierte la estrategia en decisiones concretas para que pueda aplicarse posteriormente en un curso real.",
+
+      fields:[
+
+        {
+          id:"aplicare",
+          label:"¿Qué aplicaré?",
+          type:"textarea",
+          placeholder:
+            "Indica la evidencia o parte de la estrategia que será aplicada."
+        },
+
+        {
+          id:"conQuien",
+          label:"¿Con quién?",
+          type:"input",
+          placeholder:
+            "Curso, sección o grupo."
+        },
+
+        {
+          id:"cuando",
+          label:"¿Cuándo?",
+          type:"input",
+          placeholder:
+            "Semana, sesión o momento previsto."
+        },
+
+        {
+          id:"comunicacion",
+          label:"¿Qué comunicaré previamente?",
+          type:"textarea",
+          placeholder:
+            "Consigna, criterios, instrumento, uso de IA, tiempos y condiciones de entrega."
+        },
+
+        {
+          id:"observare",
+          label:"¿Qué observaré?",
+          type:"textarea",
+          placeholder:
+            "Desempeños o situaciones clave que observarás durante la aplicación."
+        },
+
+        {
+          id:"evidenciasRecoger",
+          label:"¿Qué evidencias recogeré?",
+          type:"textarea",
+          placeholder:
+            "Capturas, productos anonimizados, instrumento aplicado, retroalimentación, registro reflexivo..."
+        },
+
+        {
+          id:"analisisPosterior",
+          label:"¿Qué analizaré después?",
+          type:"textarea",
+          placeholder:
+            "Logros, dificultades, decisiones tomadas y posibles mejoras."
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 08",
+      title:"Riesgos y ajustes previstos",
+
+      help:
+        "Anticipa dos dificultades realistas que podrían afectar la aplicación y define cómo responderías.",
+
+      fields:[
+
+        {
+          id:"riesgo1",
+          label:"Posible dificultad 1",
+          type:"textarea",
+          placeholder:
+            "Describe una dificultad que podría presentarse."
+        },
+
+        {
+          id:"respuesta1",
+          label:"Respuesta prevista 1",
+          type:"textarea",
+          placeholder:
+            "¿Qué harías si esta dificultad ocurre?"
+        },
+
+        {
+          id:"riesgo2",
+          label:"Posible dificultad 2",
+          type:"textarea",
+          placeholder:
+            "Describe una segunda dificultad posible."
+        },
+
+        {
+          id:"respuesta2",
+          label:"Respuesta prevista 2",
+          type:"textarea",
+          placeholder:
+            "¿Qué harías si esta dificultad ocurre?"
+        }
+
+      ]
+    },
+
+
+    {
+      label:"SECCIÓN 09",
+      title:"Compromiso de aplicación",
+
+      help:
+        "Define concretamente qué parte significativa de esta estrategia llevarás posteriormente al aula para desarrollar el Caso Integrador.",
+
+      fields:[
+
+        {
+          id:"compromiso",
+          label:"¿Qué aplicaré posteriormente en el Caso Integrador?",
+          type:"textarea-large",
+          placeholder:
+            "Describe qué parte de la estrategia implementarás en un curso real."
+        }
+
+      ]
+    }
+
+  ];
+
+
+  /* =========================================
+     ESTADO
+  ========================================= */
+
+  let current = 0;
+
+  const values = {};
+
+  SECTIONS.forEach(function(section){
+
+    section.fields.forEach(function(field){
+
+      values[field.id] = "";
+
+    });
+
+  });
+
+
+  const stepButtons =
+    root.querySelectorAll(".step-btn");
+
+  const editorLabel =
+    root.querySelector("#editorLabel");
+
+  const editorTitle =
+    root.querySelector("#editorTitle");
+
+  const editorHelp =
+    root.querySelector("#editorHelp");
+
+  const fieldsBox =
+    root.querySelector("#fields");
+
+  const prevBtn =
+    root.querySelector("#prevBtn");
+
+  const nextBtn =
+    root.querySelector("#nextBtn");
+
+  const progressText =
+    root.querySelector("#progressText");
+
+  const progressFill =
+    root.querySelector("#progressFill");
+
+
+  /* =========================================
+     ESCAPAR HTML
+  ========================================= */
+
+  function escapeHTML(value){
+
+    return String(value)
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+
+  }
+
+
+  function nl2br(value){
+
+    return escapeHTML(value)
+      .replace(/\n/g,"<br>");
+
+  }
+
+
+  /* =========================================
+     GUARDAR CAMPOS ACTUALES
+  ========================================= */
+
+  function saveCurrent(){
+
+    fieldsBox
+      .querySelectorAll("[data-field]")
+      .forEach(function(element){
+
+        values[element.dataset.field] =
+          element.value.trim();
+
+      });
+
+  }
+
+
+  /* =========================================
+     SECCIÓN COMPLETA
+  ========================================= */
+
+  function isSectionComplete(index){
+
+    const section =
+      SECTIONS[index];
+
+    return section.fields.every(
+      function(field){
+
+        return Boolean(
+          values[field.id] &&
+          values[field.id].trim()
+        );
+
+      }
+    );
+
+  }
+
+
+  function updateProgress(){
+
+    saveCurrent();
+
+    let completed = 0;
+
+
+    SECTIONS.forEach(
+      function(section,index){
+
+        const button =
+          stepButtons[index];
+
+
+        if(isSectionComplete(index)){
+
+          completed++;
+
+          button.classList.add(
+            "completed"
+          );
+
+        }
+        else{
+
+          button.classList.remove(
+            "completed"
+          );
+
+        }
+
+      }
+    );
+
+
+    progressText.textContent =
+      completed +
+      " de " +
+      SECTIONS.length +
+      " secciones completas";
+
+
+    progressFill.style.width =
+      (
+        completed /
+        SECTIONS.length *
+        100
+      ) +
+      "%";
+
+  }
+
+
+  /* =========================================
+     CREAR CAMPO
+  ========================================= */
+
+  function createField(field){
+
+    const wrapper =
+      document.createElement("div");
+
+    wrapper.className =
+      "field";
+
+
+    const label =
+      document.createElement("label");
+
+    label.setAttribute(
+      "for",
+      field.id
+    );
+
+    label.textContent =
+      field.label;
+
+
+    wrapper.appendChild(
+      label
+    );
+
+
+    let element;
+
+
+    if(field.type === "input"){
+
+      element =
+        document.createElement("input");
+
+      element.type =
+        "text";
+
+    }
+    else{
+
+      element =
+        document.createElement("textarea");
+
+
+      if(field.type === "textarea-large"){
+
+        element.classList.add(
+          "large"
+        );
+
+      }
+
+    }
+
+
+    element.id =
+      field.id;
+
+    element.dataset.field =
+      field.id;
+
+    element.placeholder =
+      field.placeholder || "";
+
+    element.value =
+      values[field.id] || "";
+
+
+    element.addEventListener(
+      "input",
+      function(){
+
+        values[field.id] =
+          element.value;
+
+        updateProgress();
+
+      }
+    );
+
+
+    wrapper.appendChild(
+      element
+    );
+
+
+    return wrapper;
+
+  }
+
+
+  /* =========================================
+     RENDER
+  ========================================= */
+
+  function render(){
+
+    const section =
+      SECTIONS[current];
+
+
+    editorLabel.textContent =
+      section.label;
+
+    editorTitle.textContent =
+      section.title;
+
+    editorHelp.textContent =
+      section.help;
+
+
+    fieldsBox.innerHTML =
+      "";
+
+
+    section.fields.forEach(
+      function(field){
+
+        fieldsBox.appendChild(
+          createField(field)
+        );
+
+      }
+    );
+
+
+    stepButtons.forEach(
+      function(button,index){
+
+        button.classList.toggle(
+          "active",
+          index === current
+        );
+
+      }
+    );
+
+
+    prevBtn.disabled =
+      current === 0;
+
+
+    nextBtn.textContent =
+      current ===
+      SECTIONS.length - 1
+        ? "Ir al checklist →"
+        : "Siguiente sección →";
+
+
+    updateProgress();
+
+  }
+
+
+  /* =========================================
+     NAVEGACIÓN
+  ========================================= */
+
+  stepButtons.forEach(
+    function(button,index){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          saveCurrent();
+
+          current =
+            index;
+
+          render();
+
+        }
+      );
+
+    }
+  );
+
+
+  prevBtn.addEventListener(
+    "click",
+    function(){
+
+      saveCurrent();
+
+      if(current > 0){
+
+        current--;
+
+        render();
+
+      }
+
+    }
+  );
+
+
+  nextBtn.addEventListener(
+    "click",
+    function(){
+
+      saveCurrent();
+
+
+      if(current <
+         SECTIONS.length - 1){
+
+        current++;
+
+        render();
+
+      }
+      else{
+
+        root
+          .querySelector(".checklist")
+          .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+      }
+
+    }
+  );
+
+
+  /* =========================================
+     CHECKLIST
+  ========================================= */
+
+  const checklistItems = [
+
+    "La estrategia integra AA1, AA2 y AA3 sin contradicciones.",
+
+    "La evidencia auténtica permite demostrar el resultado de aprendizaje.",
+
+    "El instrumento valora exactamente la evidencia que será producida o demostrada.",
+
+    "Los criterios son observables y comprensibles.",
+
+    "La retroalimentación orienta acciones concretas de mejora.",
+
+    "El uso de IA está definido y se comunica de manera transparente.",
+
+    "El plan de implementación es realizable con el tiempo, recursos y modalidad disponibles.",
+
+    "Está claro qué parte de la estrategia se aplicará posteriormente en el Caso Integrador."
+
+  ];
+
+
+  /* =========================================
+     DOCUMENTO FINAL
+  ========================================= */
+
+  function getValue(id){
+
+    return values[id] &&
+           values[id].trim()
+      ? values[id].trim()
+      : "Sin completar";
+
+  }
+
+
+  function sectionBlock(number,title,content){
+
+    return `
+      <section class="final-section">
+
+        <div class="section-number">
+          ${number}
+        </div>
+
+        <div class="section-content">
+
+          <h2>${escapeHTML(title)}</h2>
+
+          ${content}
+
+        </div>
+
+      </section>
+    `;
+
+  }
+
+
+  function paragraph(label,value){
+
+    return `
+      <div class="entry">
+
+        <h3>${escapeHTML(label)}</h3>
+
+        <p>${nl2br(value)}</p>
+
+      </div>
+    `;
+
+  }
+
+
+  function buildFinalDocument(){
+
+    saveCurrent();
+
+
+    const checks = [];
+
+    root
+      .querySelectorAll(
+        '.check-item input[type="checkbox"]'
+      )
+      .forEach(
+        function(input,index){
+
+          checks.push({
+            text:checklistItems[index],
+            checked:input.checked
+          });
+
+        }
+      );
+
+
+    const date =
+      new Date()
+        .toLocaleDateString(
+          "es-PE"
+        );
+
+
+    return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Estrategia final de evaluación auténtica</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:35px;
+  background:#FFFFFF;
+  color:#241F21;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.55;
+}
+
+.document{
+  max-width:950px;
+  margin:0 auto;
+}
+
+.cover{
+  padding:32px;
+  border-top:8px solid #FF0E49;
+  border-radius:12px;
+  background:
+    linear-gradient(
+      135deg,
+      #241F21 0%,
+      #30282B 55%,
+      #6B1E36 120%
+    );
+  color:#FFFFFF;
+}
+
+.cover small{
+  display:inline-block;
+  margin-bottom:10px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#FF0E49;
+  font-weight:bold;
+}
+
+.cover h1{
+  margin:0;
+  font-size:36px;
+  line-height:1.1;
+}
+
+.cover p{
+  margin:12px 0 0;
+  color:#F4ECEF;
+}
+
+.meta{
+  margin-top:14px;
+  color:#625A5D;
+  font-size:13px;
+}
+
+.final-section{
+  display:grid;
+  grid-template-columns:45px 1fr;
+  gap:14px;
+  margin-top:24px;
+  padding-bottom:22px;
+  border-bottom:1px solid #E7E1E3;
+}
+
+.section-number{
+  display:flex;
+  width:38px;
+  height:38px;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#FF0E49;
+  color:#FFFFFF;
+  font-weight:bold;
+}
+
+.section-content h2{
+  margin:4px 0 13px;
+  color:#241F21;
+  font-size:24px;
+}
+
+.entry{
+  margin-bottom:14px;
+  padding:14px 16px;
+  border-left:4px solid #FF0E49;
+  border-radius:7px;
+  background:#F8F6F7;
+}
+
+.entry:last-child{
+  margin-bottom:0;
+}
+
+.entry h3{
+  margin:0 0 5px;
+  color:#FF0E49;
+  font-size:14px;
+}
+
+.entry p{
+  margin:0;
+  color:#403A3C;
+}
+
+.check-final{
+  margin-top:25px;
+  padding:20px;
+  border-radius:10px;
+  background:#FFF1F5;
+}
+
+.check-final h2{
+  margin:0 0 12px;
+}
+
+.check-line{
+  margin:7px 0;
+}
+
+.footer{
+  margin-top:26px;
+  padding:18px;
+  border-radius:9px;
+  background:#241F21;
+  color:#FFFFFF;
+}
+
+.footer p{
+  margin:0;
+}
+
+@media print{
+
+  body{
+    padding:0;
+  }
+
+  .final-section{
+    break-inside:avoid;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="document">
+
+
+  <header class="cover">
+
+    <small>
+      AA4 · MÓDULO 4
+    </small>
+
+    <h1>
+      Estrategia final de evaluación auténtica
+      y plan de implementación
+    </h1>
+
+    <p>
+      Producto integrado preparado para su aplicación
+      posterior en el Caso Integrador.
+    </p>
+
+  </header>
+
+
+  <div class="meta">
+    Documento generado el ${escapeHTML(date)}
+  </div>
+
+
+  ${sectionBlock(
+    "1",
+    "Contexto",
+
+    paragraph(
+      "Curso",
+      getValue("curso")
+    ) +
+
+    paragraph(
+      "Resultado de aprendizaje",
+      getValue("resultado")
+    ) +
+
+    paragraph(
+      "Competencia asociada",
+      getValue("competencia")
+    ) +
+
+    paragraph(
+      "Grupo, sección o modalidad",
+      getValue("grupo")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "2",
+    "Brecha inicial",
+
+    paragraph(
+      "Síntesis de AA1",
+      getValue("brecha")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "3",
+    "Evidencia auténtica",
+
+    paragraph(
+      "Versión final de la evidencia",
+      getValue("evidencia")
+    ) +
+
+    paragraph(
+      "Justificación de autenticidad",
+      getValue("autenticidad")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "4",
+    "Instrumento",
+
+    paragraph(
+      "Tipo de instrumento",
+      getValue("tipoInstrumento")
+    ) +
+
+    paragraph(
+      "Instrumento final",
+      getValue("instrumento")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "5",
+    "Retroalimentación",
+
+    paragraph(
+      "Antes",
+      getValue("feedbackAntes")
+    ) +
+
+    paragraph(
+      "Durante",
+      getValue("feedbackDurante")
+    ) +
+
+    paragraph(
+      "Después",
+      getValue("feedbackDespues")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "6",
+    "Uso responsable de IA",
+
+    paragraph(
+      "Uso permitido",
+      getValue("iaPermitido")
+    ) +
+
+    paragraph(
+      "Declaración y transparencia",
+      getValue("iaDeclaracion")
+    ) +
+
+    paragraph(
+      "Verificación y autoría",
+      getValue("iaVerificacion")
+    ) +
+
+    paragraph(
+      "Juicio humano",
+      getValue("iaJuicio")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "7",
+    "Plan de implementación",
+
+    paragraph(
+      "¿Qué aplicaré?",
+      getValue("aplicare")
+    ) +
+
+    paragraph(
+      "¿Con quién?",
+      getValue("conQuien")
+    ) +
+
+    paragraph(
+      "¿Cuándo?",
+      getValue("cuando")
+    ) +
+
+    paragraph(
+      "Comunicación previa",
+      getValue("comunicacion")
+    ) +
+
+    paragraph(
+      "¿Qué observaré?",
+      getValue("observare")
+    ) +
+
+    paragraph(
+      "Evidencias que recogeré",
+      getValue("evidenciasRecoger")
+    ) +
+
+    paragraph(
+      "Análisis posterior",
+      getValue("analisisPosterior")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "8",
+    "Riesgos y ajustes previstos",
+
+    paragraph(
+      "Dificultad 1",
+      getValue("riesgo1")
+    ) +
+
+    paragraph(
+      "Respuesta prevista 1",
+      getValue("respuesta1")
+    ) +
+
+    paragraph(
+      "Dificultad 2",
+      getValue("riesgo2")
+    ) +
+
+    paragraph(
+      "Respuesta prevista 2",
+      getValue("respuesta2")
+    )
+  )}
+
+
+  ${sectionBlock(
+    "9",
+    "Compromiso de aplicación",
+
+    paragraph(
+      "Parte de la estrategia que se llevará al aula",
+      getValue("compromiso")
+    )
+  )}
+
+
+  <section class="check-final">
+
+    <h2>
+      Checklist final de coherencia
+    </h2>
+
+    ${checks.map(
+      function(item){
+
+        return `
+          <div class="check-line">
+            ${item.checked ? "☑" : "☐"}
+            ${escapeHTML(item.text)}
+          </div>
+        `;
+
+      }
+    ).join("")}
+
+  </section>
+
+
+  <footer class="footer">
+
+    <p>
+      <strong>AA4:</strong>
+      esta estrategia queda preparada para su aplicación posterior.
+      La evidencia de implementación en aula corresponde
+      al Caso Integrador.
+    </p>
+
+  </footer>
+
+
+</div>
+
+</body>
+</html>`;
+
+  }
+
+
+  /* =========================================
+     DESCARGA
+  ========================================= */
+
+  const status =
+    root.querySelector(
+      "#downloadStatus"
+    );
+
+
+  root
+    .querySelector("#downloadBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const html =
+          buildFinalDocument();
+
+
+        const blob =
+          new Blob(
+            [html],
+            {
+              type:"text/html;charset=utf-8"
+            }
+          );
+
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+
+        link.href =
+          url;
+
+
+        link.download =
+          "AA4_Estrategia_Final_Evaluacion_Autentica.html";
+
+
+        document.body.appendChild(
+          link
+        );
+
+
+        link.click();
+
+        link.remove();
+
+
+        setTimeout(
+          function(){
+
+            URL.revokeObjectURL(
+              url
+            );
+
+          },
+          500
+        );
+
+
+        status.className =
+          "download-status show";
+
+        status.textContent =
+          "Tu estrategia fue generada. Abre el archivo descargado y, si necesitas PDF, utiliza Imprimir → Guardar como PDF.";
+
+      }
+    );
+
+
+  /* =========================================
+     VISTA FINAL
+  ========================================= */
+
+  root
+    .querySelector("#previewBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        const html =
+          buildFinalDocument();
+
+
+        const preview =
+          window.open(
+            "",
+            "_blank"
+          );
+
+
+        if(preview){
+
+          preview.document.open();
+
+          preview.document.write(
+            html
+          );
+
+          preview.document.close();
+
+        }
+        else{
+
+          status.className =
+            "download-status show";
+
+          status.textContent =
+            "El navegador bloqueó la vista previa. Puedes utilizar directamente el botón de descarga.";
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     INICIO
+  ========================================= */
+
+  render();
+
+})();
+</script>
+
+</body>
+</html>
